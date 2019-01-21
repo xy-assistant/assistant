@@ -2,18 +2,22 @@ server:
   port: 8088
 spring:
   ## 数据库
-  datasource:
-    name: DefaultDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: 123456
-    url: jdbc:mysql://localhost:3306/quartz_test?serverTimezone=UTC
-  nanjing-datasource:
-    name: NanJingDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: 123456
-    url: jdbc:mysql://localhost:3306/nanjing?serverTimezone=UTC
+  master:
+    datasource:
+      name: masterDataSource
+      driverClassName: com.mysql.cj.jdbc.Driver
+      username: root
+      password: 123456
+      jdbc-url: jdbc:mysql://localhost:3306/quartz_test?serverTimezone=UTC
+      type: com.zaxxer.hikari.HikariDataSource
+  nanjing:
+    datasource:
+      name: nanJingDataSource
+      driverClassName: com.mysql.cj.jdbc.Driver
+      username: root
+      password: 123456
+      jdbc-url: jdbc:mysql://localhost:3306/nanjing?serverTimezone=UTC
+      type: com.zaxxer.hikari.HikariDataSource
   ## 定时任务相关
   quartz:
     auto-startup: true
@@ -22,11 +26,3 @@ spring:
     scheduler-name: quartzScheduler
     startup-delay: 0s
     wait-for-jobs-to-complete-on-shutdown: false
-    properties:
-      org:
-        quartz:
-          jobStore:
-            class: org.quartz.impl.jdbcjobstore.JobStoreTX
-            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
-            tablePrefix: QRTZ_
-            dataSource: DefaultDataSource

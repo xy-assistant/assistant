@@ -1,4 +1,4 @@
-package com.hpin.assistant.service;
+package com.hpin.assistant.service.schedule;
 
 import com.hpin.assistant.job.AttachementMailJob;
 import com.hpin.assistant.job.AttachementMailJobParameter;
@@ -23,12 +23,8 @@ public class ScheduleTaskService {
     @Autowired
     Scheduler quartzScheduler;
 
-    /**
-     * i. 添加新任务
-     *
-     * @return
-     */
     public void addTask(AttachementMailJobParameter jobDescribe,StatusManagement status) {
+
         try {
             this.buildTrigger(jobDescribe);
             status.done();

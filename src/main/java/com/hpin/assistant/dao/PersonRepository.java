@@ -6,13 +6,15 @@ import org.springframework.stereotype.Repository;
 
 /**
  * @author huaiku
+ * @date 2019年1月21日
+ *
  */
 @Repository
-public class TaskRepository {
-    @Autowired
+public class PersonRepository {
+    //@Autowired
     JdbcTemplate template;
 
-    public boolean test() {
-        return this.template.queryForObject("select 1=1",Integer.class)==null;
+    public String getAddress() {
+        return this.template.queryForObject("SELECT ADDRESS FROM PERSONS WHERE Id_P = 1",String.class);
     }
 }
