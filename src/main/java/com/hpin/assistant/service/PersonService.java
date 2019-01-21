@@ -11,15 +11,16 @@ import org.springframework.stereotype.Service;
  * @date 2019年1月21日
  * @desc 测试类
  */
-//@Service
+@Service
 public class PersonService {
     private static Logger logger = LoggerFactory.getLogger(PersonService.class);
 
-   // @Autowired
+    @Autowired
     PersonRepository personRepository;
 
-    public void queryPerson(String cityKey) {
+    public Object queryPerson(String cityKey) {
         String address = this.personRepository.getAddress();
         logger.info("查询到地址为：{}",address);
+        return  null;
     }
 }

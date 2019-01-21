@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class PersonRepository {
-    //@Autowired
+    @Autowired
     JdbcTemplate template;
 
     public String getAddress() {
