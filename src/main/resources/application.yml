@@ -3,13 +3,13 @@ server:
 spring:
   ## 数据库
   datasource:
-    name: mydb
+    name: DefaultDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
     url: jdbc:mysql://localhost:3306/quartz_test?serverTimezone=UTC
   nanjing-datasource:
-    name: db-nanjing
+    name: NanJingDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
@@ -29,4 +29,4 @@ spring:
             class: org.quartz.impl.jdbcjobstore.JobStoreTX
             driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
             tablePrefix: QRTZ_
-            dataSource: mydb
+            dataSource: DefaultDataSource
