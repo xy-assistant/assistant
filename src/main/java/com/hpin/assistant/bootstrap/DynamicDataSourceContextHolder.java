@@ -7,13 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Auther: yukong
+ * @Auther: huaiku
  * @Date: 2018/8/15 10:49
  * @Description: 数据源上下文
  */
 public class DynamicDataSourceContextHolder {
-
-    private static Logger logger = LoggerFactory.getLogger(DynamicDataSourceContextHolder.class);
 
     /**
      * 存储已经注册的数据源的key
@@ -31,7 +29,6 @@ public class DynamicDataSourceContextHolder {
 
     public static void active(String dataSourceRouterKey) {
         removeDataSourceRouterKey();
-        logger.info("切换至{}数据源", dataSourceRouterKey);
         HOLDER.set(dataSourceRouterKey);
     }
 

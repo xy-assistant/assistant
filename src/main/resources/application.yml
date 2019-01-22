@@ -4,6 +4,9 @@ logging:
   level:
     root: info
 spring:
+  aop:
+    auto: true
+    proxy-target-class: true
   ## 数据库
   datasource:
     default:
