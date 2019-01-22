@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class DataSourceAdjustor {
     private static final Logger logger = LoggerFactory.getLogger(DataSourceAdjustor.class);
 
-    @Before("execution(public * com.hpin.assistant..*.query*(String,..)) && args(cityCode,..)")
+    @Before("execution(* com.hpin.assistant.service.DynamicSourceService.query*(String,..)) && args(cityCode,..)")
     public void othersDataSourceWired(String cityCode) {
         if (DynamicDataSourceContextHolder.containsDataSource(cityCode)) {
             logger.info("active {} datasource...",cityCode);
@@ -21,7 +21,7 @@ public class DataSourceAdjustor {
         }
     }
 
-    @Before("execution(public * com.hpin..service..Schedule*.*(..))")
+    @Before("execution(public * com.hpin..service.schedule.ScheduleWrapperService.*(..))")
     public void taskScheduleAdjustor() {
         DynamicDataSourceContextHolder.active(DataSourceKeyStore.DefaultDataSource);
     }

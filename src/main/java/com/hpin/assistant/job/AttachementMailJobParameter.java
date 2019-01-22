@@ -1,8 +1,14 @@
 package com.hpin.assistant.job;
+
+import com.hpin.assistant.domain.MailInfo;
+import com.hpin.assistant.domain.TaskBindSqlInfo;
 import com.hpin.assistant.utils.JsonUtils;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author huaiku
@@ -13,11 +19,31 @@ public class AttachementMailJobParameter implements Serializable {
     private String jobName;
     private String jobGroup;
     private String jobTrigger;
-    private String status;
     private String cronExpression;
     private Boolean isSync = false;
     private String description;
+    private Set<String> cities;
+    private long mailInfoId;
+    private long sqlInfoId;
     private Date updatedTime = new Date();
+    private transient MailInfo mailInfo;
+    private transient TaskBindSqlInfo sqlInfo;
+
+    public MailInfo getMailInfo() {
+        return mailInfo;
+    }
+
+    public void setMailInfo(MailInfo mailInfo) {
+        this.mailInfo = mailInfo;
+    }
+
+    public TaskBindSqlInfo getSqlInfo() {
+        return sqlInfo;
+    }
+
+    public void setSqlInfo(TaskBindSqlInfo sqlInfo) {
+        this.sqlInfo = sqlInfo;
+    }
 
     public String getJobName() {
         return jobName;
@@ -41,14 +67,6 @@ public class AttachementMailJobParameter implements Serializable {
 
     public void setJobTrigger(String jobTrigger) {
         this.jobTrigger = jobTrigger;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public String getCronExpression() {
@@ -81,6 +99,39 @@ public class AttachementMailJobParameter implements Serializable {
 
     public void setUpdatedTime(Date updatedTime) {
         this.updatedTime = updatedTime;
+    }
+
+    public long getMailInfoId() {
+        return mailInfoId;
+    }
+
+    public void setMailInfoId(long mailInfoId) {
+        this.mailInfoId = mailInfoId;
+    }
+
+    public long getSqlInfoId() {
+        return sqlInfoId;
+    }
+
+    public void setSqlInfoId(long sqlInfoId) {
+        this.sqlInfoId = sqlInfoId;
+    }
+
+    public Set<String> getCities() {
+        return cities;
+    }
+
+    public void setCities(Set<String> cities) {
+        this.cities = cities;
+    }
+
+    public void setCtiy(String cityCode) {
+        if (Objects.nonNull(this.cities)) {
+            this.cities.add(cityCode);
+        } else {
+            this.cities = new HashSet<>();
+            this.cities.add(cityCode);
+        }
     }
 
     @Override

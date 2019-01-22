@@ -8,7 +8,17 @@ package com.hpin.assistant.management;
 public class StatusManagement {
     private boolean done;
     private String errorMessage;
-
+    private String info;
+    public StatusManagement(){}
+    public StatusManagement(boolean done,String info) {
+        this.done = done;
+        this.info = info;
+    }
+    public StatusManagement(boolean done,String errorMessage,String info) {
+        this.done = done;
+        this.errorMessage = errorMessage;
+        this.info = info;
+    }
     public void done() {
         this.done = true;
     }
@@ -25,5 +35,13 @@ public class StatusManagement {
 
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 }
