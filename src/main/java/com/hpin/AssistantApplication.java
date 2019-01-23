@@ -63,7 +63,7 @@ public class AssistantApplication {
 //            }
 
             */
-            AttachementMailJobParameter parameter = new AttachementMailJobParameter();
+            /*AttachementMailJobParameter parameter = new AttachementMailJobParameter();
             parameter.setCityCode(DataSourceKeyStore.DefaultDataSource);
             parameter.setJobName("邮件列表发送");
             parameter.setJobGroup("mailList");
@@ -90,7 +90,7 @@ public class AssistantApplication {
             sqlInfo.setFileName("邮件发送列表信息");
             parameter.setSqlInfo(sqlInfo);
             StatusManagement statusManagement = new StatusManagement();
-            wrapperService.addTask(parameter,statusManagement);
+            wrapperService.addTask(parameter,statusManagement);*/
         };
     }
 }
