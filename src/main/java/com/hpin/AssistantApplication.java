@@ -74,7 +74,7 @@ public class AssistantApplication {
             info.setMessage("这是测试邮件，测试我发邮件是否能成功哈哈哈哈哈哈...");
             info.setSendList("2293987337@qq.com");
             info.setCopyList("2739976952@qq.com;banboll@outlook.com");
-            info.setFrom("Huaiku<yangjun2@5i5j.com>");
+            info.setFromAddress("Huaiku<yangjun2@5i5j.com>");
             info.setSubject("邮件测试..");
             info.setCreateDate(new Date());
             parameter.setMailInfo(info);

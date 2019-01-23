@@ -19,7 +19,6 @@ public class AttachementMailJobParameter implements Serializable {
     private String jobName;
     private String jobGroup;
     private String jobTrigger;
-
     private String cronExpression;
     private Boolean isSync = false;
     private String description;
