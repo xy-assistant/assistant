@@ -50,11 +50,12 @@ public class MailServiceImpl implements EmailService {
      *
      * @param helper
      * @param info
+     *
      */
     private void wired(MimeMessageHelper helper, MailInfo info) throws MessagingException {
         // 基本信息装载
         helper.setTo(info.getTo());
-        helper.setFrom(info.getFrom());
+        helper.setFrom(info.getFromAddress());
         helper.setSubject(info.getSubject());
         helper.setText(info.getMessage());
         helper.setCc(info.getCc());

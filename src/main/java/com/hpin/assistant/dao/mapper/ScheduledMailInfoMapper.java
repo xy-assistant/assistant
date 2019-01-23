@@ -11,4 +11,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ScheduledMailInfoMapper {
     Integer insertMainInfo(MailInfo info);
+    MailInfo queryById(Integer id);
 }

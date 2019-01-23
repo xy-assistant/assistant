@@ -19,12 +19,13 @@ public class AttachementMailJobParameter implements Serializable {
     private String jobName;
     private String jobGroup;
     private String jobTrigger;
+
     private String cronExpression;
     private Boolean isSync = false;
     private String description;
-    private Set<String> cities;
-    private long mailInfoId;
-    private long sqlInfoId;
+    private String cityCode;
+    private Integer mailInfoId;
+    private Integer sqlInfoId;
     private Date updatedTime = new Date();
     private transient MailInfo mailInfo;
     private transient TaskBindSqlInfo sqlInfo;
@@ -101,37 +102,32 @@ public class AttachementMailJobParameter implements Serializable {
         this.updatedTime = updatedTime;
     }
 
-    public long getMailInfoId() {
-        return mailInfoId;
-    }
-
-    public void setMailInfoId(long mailInfoId) {
-        this.mailInfoId = mailInfoId;
-    }
-
-    public long getSqlInfoId() {
+    public Integer getSqlInfoId() {
         return sqlInfoId;
     }
 
-    public void setSqlInfoId(long sqlInfoId) {
+    public String getCityCode() {
+        return cityCode;
+    }
+
+    public void setCityCode(String cityCode) {
+        this.cityCode = cityCode;
+    }
+
+    public Integer getMailInfoId() {
+        return mailInfoId;
+    }
+
+    public void setMailInfoId(Integer mailInfoId) {
+        this.mailInfoId = mailInfoId;
+    }
+
+    public void synId() {
+        this.mailInfoId = this.mailInfo.getId();
+        this.sqlInfoId = this.sqlInfo.getId();
+    }
+    public void setSqlInfoId(Integer sqlInfoId) {
         this.sqlInfoId = sqlInfoId;
-    }
-
-    public Set<String> getCities() {
-        return cities;
-    }
-
-    public void setCities(Set<String> cities) {
-        this.cities = cities;
-    }
-
-    public void setCtiy(String cityCode) {
-        if (Objects.nonNull(this.cities)) {
-            this.cities.add(cityCode);
-        } else {
-            this.cities = new HashSet<>();
-            this.cities.add(cityCode);
-        }
     }
 
     @Override

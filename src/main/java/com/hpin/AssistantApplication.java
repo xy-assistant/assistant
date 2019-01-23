@@ -64,11 +64,12 @@ public class AssistantApplication {
 
             */
             AttachementMailJobParameter parameter = new AttachementMailJobParameter();
-            parameter.setCtiy(DataSourceKeyStore.DefaultDataSource);
-            parameter.setJobName("newTestJob");
-            parameter.setJobGroup("newTestJobGroup");
-            parameter.setCronExpression("0/10 * * * * ?");
-            parameter.setDescription("Execute job  every 5 seconds ... 就是为了测试..");
+            parameter.setCityCode(DataSourceKeyStore.DefaultDataSource);
+            parameter.setJobName("邮件列表发送");
+            parameter.setJobGroup("mailList");
+            parameter.setCronExpression("0 20 17 * * ?");
+            parameter.setDescription("这是最近系统添加的邮件列表，请查收");
+            parameter.setCityCode("defaultDataSource");
             MailInfo info = new MailInfo();
             info.setMessage("这是测试邮件，测试我发邮件是否能成功哈哈哈哈哈哈...");
             info.setSendList("2293987337@qq.com");
@@ -78,8 +79,15 @@ public class AssistantApplication {
             info.setCreateDate(new Date());
             parameter.setMailInfo(info);
             TaskBindSqlInfo sqlInfo = new TaskBindSqlInfo();
-            sqlInfo.setSqlText("select * from dual");
+            sqlInfo.setSqlText(new StringBuilder("select ")
+                    .append(" 	`subject` as 主题,")
+                    .append(" 	`from` as 邮件发送者,")
+                    .append(" 	message as 内容信息,")
+                    .append(" 	copyList as 抄送对象,")
+                    .append(" 	sendList as 发送对象")
+                    .append(" from qrtz_task_mail_info").toString());
             sqlInfo.setCreateDate(new Date());
+            sqlInfo.setFileName("邮件发送列表信息");
             parameter.setSqlInfo(sqlInfo);
             StatusManagement statusManagement = new StatusManagement();
             wrapperService.addTask(parameter,statusManagement);

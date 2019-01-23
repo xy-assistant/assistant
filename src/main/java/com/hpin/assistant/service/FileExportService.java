@@ -1,6 +1,10 @@
 package com.hpin.assistant.service;
 
+import com.hpin.assistant.dao.FileExportDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author huaiku
@@ -9,18 +13,17 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class FileExportService implements DynamicSourceService{
+    @Autowired
+    FileExportDao fileExportDao;
+
     @Override
     public <T> T query(String cityCode) {
         return null;
     }
 
     @Override
-    public <T, E> T query(String cityCode, E e) {
-        return null;
+    public List<Object[]> query(String cityCode, final List<String> titles, String sqlText) {
+        return fileExportDao.queryExportData(titles,sqlText);
     }
 
-    @Override
-    public <T> T queryById(String cityCode, long id) {
-        return null;
-    }
 }

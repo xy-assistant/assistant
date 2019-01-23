@@ -1,9 +1,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hpin.assistant.dao.mapper.ScheduledMailInfoMapper">
-    <insert id="insertMainInfo" parameterType="MailInfo">
+    <insert id="insertMainInfo" keyColumn="id" parameterType="MailInfo">
+        /* 查询id */
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            SELECT MAX(ID)+1 AS ID FROM QRTZ_TASK_MAIL_INFO
+        </selectKey>
+
         INSERT INTO QRTZ_TASK_MAIL_INFO
-            (id,subject,`from`,message,copyList,sendList,nickName,createDate,modifyDate)
+            (id,subject,fromAddress,message,copyList,sendList,nickName,createDate,modifyDate)
         VALUES
-            (#{id}, #{subject}, #{from},#{message},#{copyList},#{sendList},#{nickName},#{createDate},#{modifyDate})
+            (#{id},#{subject}, #{fromAddress},#{message},#{copyList},#{sendList},#{nickName},#{createDate},#{modifyDate})
     </insert>
+
+    <select id="queryById" parameterType="int" resultType="MailInfo">
+        SELECT * FROM QRTZ_TASK_MAIL_INFO WHERE ID = #{id}
+    </select>
 </mapper>

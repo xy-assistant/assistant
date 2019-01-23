@@ -2,6 +2,8 @@ package com.hpin.assistant.service.schedule;
 
 import com.hpin.assistant.dao.mapper.ScheduledMailInfoMapper;
 import com.hpin.assistant.dao.mapper.ScheduledSqlInfoMapper;
+import com.hpin.assistant.domain.MailInfo;
+import com.hpin.assistant.domain.TaskBindSqlInfo;
 import com.hpin.assistant.job.AttachementMailJobParameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,19 +30,27 @@ public class MailAndSqlService {
      *
      * i. 保存邮件和sql信信息
      * @param jobDescribe
+     *
+     *
+     *
+     *
      * @return
      *
      */
     public void addBindSqlAndEmail(AttachementMailJobParameter jobDescribe) {
-        Integer rowEffected;
         if (Objects.nonNull(jobDescribe.getMailInfo())) {
-            rowEffected = scheduledMailInfoMapper.insertMainInfo(jobDescribe.getMailInfo());
-            logger.info("insertMainInfo 受影响行数：{}",rowEffected);
+            scheduledMailInfoMapper.insertMainInfo(jobDescribe.getMailInfo());
         }
 
         if (Objects.nonNull(jobDescribe.getSqlInfo())) {
-            rowEffected = scheduledSqlInfoMapper.insertSqlInfo(jobDescribe.getSqlInfo());
-            logger.info("insertSqlInfo 受影响行数：{}",rowEffected);
+            scheduledSqlInfoMapper.insertSqlInfo(jobDescribe.getSqlInfo());
         }
+    }
+
+    public void queryMainAndSqlInfo(AttachementMailJobParameter jobDescribe) {
+        MailInfo mailInfo = this.scheduledMailInfoMapper.queryById(jobDescribe.getMailInfoId());
+        jobDescribe.setMailInfo(mailInfo);
+        TaskBindSqlInfo sqlInfo = this.scheduledSqlInfoMapper.queryById(jobDescribe.getSqlInfoId());
+        jobDescribe.setSqlInfo(sqlInfo);
     }
 }

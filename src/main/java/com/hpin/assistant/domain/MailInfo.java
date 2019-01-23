@@ -15,11 +15,11 @@ public class MailInfo implements Serializable {
 
     private static final long serialVersionUID = 100L;
 
-    private long id;
+    private Integer id;
 
     private String subject;
 
-    private String from;
+    private String fromAddress;
 
     private String message;
 
@@ -55,11 +55,11 @@ public class MailInfo implements Serializable {
         this.sendList = sendList;
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -87,12 +87,12 @@ public class MailInfo implements Serializable {
         this.subject = subject;
     }
 
-    public String getFrom() {
-        return from;
+    public String getFromAddress() {
+        return fromAddress;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setFromAddress(String fromAddress) {
+        this.fromAddress = fromAddress;
     }
 
     public String getMessage() {

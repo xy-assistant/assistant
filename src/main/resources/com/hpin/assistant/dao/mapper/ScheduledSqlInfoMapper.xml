@@ -1,10 +1,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hpin.assistant.dao.mapper.ScheduledSqlInfoMapper">
     <!--插入sql描述-->
-    <insert id="insertSqlInfo" parameterType="TaskBindSqlInfo">
+    <insert id="insertSqlInfo" keyColumn="id" parameterType="TaskBindSqlInfo">
+        /* 查询id */
+        <selectKey  keyProperty="id" resultType="int" order="BEFORE">
+            SELECT MAX(ID)+1 AS ID FROM QRTZ_TASK_SQL_INFO
+        </selectKey>
+
         INSERT INTO QRTZ_TASK_SQL_INFO
-            (id,sqlText,createDate,modifyDate)
+            (id,sqlText,createDate,modifyDate,defaultPath,fileName)
         VALUES
-            (#{id}, #{sqlText},#{createDate},#{modifyDate})
+            (#{id},#{sqlText},#{createDate},#{modifyDate},#{defaultPath},#{fileName})
     </insert>
+
+    <select id="queryById" parameterType="int" resultType="TaskBindSqlInfo">
+        SELECT * FROM QRTZ_TASK_SQL_INFO WHERE ID = #{id}
+    </select>
 </mapper>

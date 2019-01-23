@@ -12,16 +12,37 @@ import java.util.Date;
 public class TaskBindSqlInfo implements Serializable {
 
     private static final long serialVersionUID = 101L;
-    private long id;
+    private Integer id;
     private String sqlText;
     private Date createDate;
     private Date modifyDate;
+    private String defaultPath;
+    private String fileName;
 
-    public long getId() {
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getExcelFileName() {
+        return this.fileName+".xlsx";
+    }
+    public String getDefaultPath() {
+        return defaultPath;
+    }
+
+    public void setDefaultPath(String defaultPath) {
+        this.defaultPath = defaultPath;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

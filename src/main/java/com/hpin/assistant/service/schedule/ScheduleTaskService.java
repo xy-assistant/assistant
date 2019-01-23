@@ -4,6 +4,7 @@ import com.hpin.assistant.job.AttachementMailJob;
 import com.hpin.assistant.job.AttachementMailJobParameter;
 import com.hpin.assistant.job.JobConstant;
 import com.hpin.assistant.management.StatusManagement;
+import com.hpin.assistant.utils.JsonUtils;
 import org.quartz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,20 +24,10 @@ public class ScheduleTaskService {
     @Autowired
     Scheduler quartzScheduler;
 
-    public void addTask(AttachementMailJobParameter jobDescribe,StatusManagement status) {
-
-        try {
-            this.buildTrigger(jobDescribe);
-            status.done();
-        } catch (SchedulerException e) {
-            logger.error("failed to add new job to quartzScheduler,error message:{},jobDescribe:{}",
-                    new Object[]{
-                            e.getMessage(),
-                            jobDescribe.toString()
-                    });
-            status.failed();
-            status.setErrorMessage(e.getMessage());
-        }
+    public void addTask(AttachementMailJobParameter jobDescribe, StatusManagement status) throws SchedulerException {
+        this.buildTrigger(jobDescribe);
+        status.done();
+        logger.info("add job success ... {}", JsonUtils.toJson(jobDescribe));
     }
 
     /**
@@ -51,6 +42,7 @@ public class ScheduleTaskService {
     public void restart() {
 
     }
+
     /**
      * i. 暂停任务调度
      *
@@ -71,6 +63,6 @@ public class ScheduleTaskService {
         jobDetail.getJobDataMap().put(JobConstant.JOB_DESCRIBE.name(), jobDescribe);
         CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(jobDescribe.getCronExpression());
         CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity(jobDescribe.getJobName(), jobDescribe.getJobGroup()).withSchedule(cronScheduleBuilder).build();
-        this.quartzScheduler.scheduleJob(jobDetail,cronTrigger);
+        this.quartzScheduler.scheduleJob(jobDetail, cronTrigger);
     }
 }
